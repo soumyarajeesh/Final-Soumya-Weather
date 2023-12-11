@@ -9,7 +9,6 @@ class Weather {
         const data = await response.json();
         return data;
     }
-
 }
 
 //Fetch Weather data
