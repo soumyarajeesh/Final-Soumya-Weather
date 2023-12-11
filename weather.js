@@ -12,6 +12,7 @@ class Weather {
 
 }
 
+//Fetch Weather data
 document.getElementById('weather-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const cityInput = document.getElementById('city-input');
