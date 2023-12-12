@@ -25,7 +25,7 @@ document.getElementById('weather-form').addEventListener('submit', function(e) {
         return;
     }
 
-    const weather = new Weather('ffe1a143b6990927809bed7b8012bcb2'); // Replace with your API key
+    const weather = new Weather('Replace with your API key'); // Replace with your API key
     weather.getWeather(city)
         .then(data => {
             if (data.cod !== 200) {
