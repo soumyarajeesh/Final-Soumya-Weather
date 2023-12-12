@@ -11,7 +11,7 @@ class Weather {
     }
 }
 
-//Fetch Weather data
+// Fetch Weather data
 document.getElementById('weather-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const cityInput = document.getElementById('city-input');
@@ -32,6 +32,8 @@ document.getElementById('weather-form').addEventListener('submit', function(e) {
                 displayError(data.message);
             } else {
                 displayWeatherData(data);
+                // Store the entered city in local storage
+                storeCityName(city);
             }
         })
         .catch(() => {
@@ -39,6 +41,7 @@ document.getElementById('weather-form').addEventListener('submit', function(e) {
         });
 });
 
+// Display weather data on the page
 function displayWeatherData(data) {
     const resultDiv = document.getElementById('weather-result');
     const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
@@ -52,6 +55,7 @@ function displayWeatherData(data) {
     `;
 }
 
+// Display error message on the page
 function displayError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.id = 'error-message';
@@ -60,12 +64,27 @@ function displayError(message) {
     document.getElementById('weather-form').after(errorDiv);
 }
 
+// Clear error message from the page
 function clearError() {
     const errorDiv = document.getElementById('error-message');
     if (errorDiv) {
         errorDiv.remove();
     }
 }
+
+// Store the last entered city in local storage
+function storeCityName(city) {
+    localStorage.setItem('lastCity', city);
+}
+
+// Retrieve the last entered city from local storage
+function getLastCity() {
+    return localStorage.getItem('lastCity');
+}
+
+// Use getLastCity() to prepopulate the input field
+const cityInput = document.getElementById('city-input');
+cityInput.value = getLastCity();
 
 function clearWeatherInfo() {
     document.getElementById('weather-result').innerHTML = '';
